@@ -18,7 +18,7 @@ start
             note right
                 Delete .git folder and initilize as new repo
                 For more guidance:
-                https://github.com/vamseeachanta/py_package
+                https://github.com/vamseeachanta/py-package-template
             end note
         :Adapt folder structure as suited;
             note right
