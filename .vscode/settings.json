@@ -1,4 +1,40 @@
 {
     "python.pythonPath": "D:\\miniconda\\envs\\utilities\\python.exe",
-    "cwd": "D:\\GitHub\\py_package\\src"
+    "cwd": "D:\\GitHub\\py_package\\src",
+    
+    // Terminal configuration for Git Bash
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "path": [
+                "${env:ProgramFiles}\\Git\\bin\\bash.exe",
+                "${env:ProgramFiles(x86)}\\Git\\bin\\bash.exe",
+                "${env:LocalAppData}\\Programs\\Git\\bin\\bash.exe"
+            ],
+            "args": [],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    
+    // Additional Git Bash configuration
+    "terminal.integrated.env.windows": {
+        "MSYS_NO_PATHCONV": "1",
+        "MSYS2_ARG_CONV_EXCL": "*"
+    },
+    
+    // Shell integration for Git Bash
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.shellIntegration.decorationsEnabled": "both"
 }

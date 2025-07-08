@@ -1,9 +1,9 @@
 [build-system]
-requires      = ["setuptools>=61.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.13.0"]
+build-backend = "hatchling.build"
 
 [project]
-name = "py_package"
+name = "py-package-template"
 version = "0.0.1"
 description = "Python Package Cookiecutter Code"
 readme = "README.md"
@@ -13,21 +13,57 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
-keywords=['package', 'library', 'module']
-dependencies = ["pyyaml", 'tomli; python_version < "3.11"']
-requires-python = ">=3.7"
+keywords = ["package", "library", "module", "template", "cookiecutter"]
+dependencies = [
+    "pyyaml>=6.0",
+    "tomli>=2.0.0; python_version < '3.11'"
+]
+requires-python = ">=3.8"
 
-    [project.optional-dependencies]
-    build = ["build", "twine"]
-    dev   = ["black", "bumpver", "isort", "pytest"]
+[project.optional-dependencies]
+build = [
+    "build>=0.10.0",
+    "twine>=4.0.0",
+]
+dev = [
+    "black>=23.0.0",
+    "bumpver>=2023.1124",
+    "isort>=5.12.0",
+    "pytest>=7.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+docs = [
+    "sphinx>=5.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
 
-    [project.scripts]
-    pressure_pipe = "py_package.pressure_pipe"
+[project.scripts]
+py-package-template = "py_package_template.__main__:main"
 
-    [project.urls]
-    repository    = "https://github.com/vamseeachanta/py_package"
-    documentation = "https://github.com/vamseeachanta/py_package/blob/main/README.md"
+[project.urls]
+repository = "https://github.com/vamseeachanta/py-package-template"
+documentation = "https://github.com/vamseeachanta/py-package-template/blob/main/README.md"
+changelog = "https://github.com/vamseeachanta/py-package-template/blob/main/CHANGELOG.md"
+issues = "https://github.com/vamseeachanta/py-package-template/issues"
+
+# uv-specific configuration
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "bumpver>=2023.1124",
+]
 
 
 [tool.bumpver]
@@ -43,8 +79,8 @@ push            = false
         'current_version = "{version}"',
         'version = "{version}"',
     ]
-    "src/py_package/__init__.py" = ["{version}"]
-    "src/py_package/__main__.py" = ["- leveraged-multi-family-analysis v{version}"]
+    "src/py_package_template/__init__.py" = ["{version}"]
+    "src/py_package_template/__main__.py" = ["- leveraged-multi-family-analysis v{version}"]
 
 [tool.isort]
 profile                   = "black"
@@ -58,3 +94,64 @@ strict = true
     [[tool.mypy.overrides]]
     module                 = "feedparser"
     ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--tb=short",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests", 
+    "performance: marks tests as performance tests",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/site-packages/*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+ignore_errors = true
+precision = 2
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"

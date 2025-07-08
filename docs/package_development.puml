@@ -14,7 +14,7 @@ start
         :Make a copy/clone of cookiecutter library;
             note right
                 Use library of choice. An exmaple:
-                https://github.com/vamseeachanta/py_package
+                https://github.com/vamseeachanta/py-package-template
             end note
 
         :Map to new repo;
@@ -25,15 +25,15 @@ start
 
         :Rename key folders;
             note right
-                {py_package}, 
-                {py_package}/src/{py_package}
+                {py-package-template}, 
+                {py-package-template}/src/{py_package_template}
                 etc.
             end note
 
         :Rename key filenames;
             note right
-                {py_package}/src/{py_package}/{calculation}.py
-                {py_package}/src/{py_package}/tests/test_{calculation}.py
+                {py-package-template}/src/{py_package_template}/{calculation}.py
+                {py-package-template}/src/{py_package_template}/tests/test_{calculation}.py
                 etc.
             end note
 

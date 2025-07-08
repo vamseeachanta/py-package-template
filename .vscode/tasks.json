@@ -1,0 +1,287 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "uv: Run Basic Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["basic"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "basic"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Tests with Coverage",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["coverage"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "coverage"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Code Quality Checks",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["quality"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "quality"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Fix Code Formatting",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["format"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "format"]
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Full Test Suite",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["full"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "full"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Unit Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["unit"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "unit"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Integration Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["integration"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "integration"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Performance Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["performance"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "performance"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Parallel Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["parallel"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "parallel"]
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Clean Test Artifacts",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["clean"],
+            "windows": {
+                "command": "powershell",
+                "args": ["-File", "${workspaceFolder}/scripts/uv-test.ps1", "clean"]
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Install Dependencies",
+            "type": "shell",
+            "command": "uv",
+            "args": ["sync", "--dev"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Basic Tests (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["basic"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Tests with Coverage (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["coverage"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Full Test Suite (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["full"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}
