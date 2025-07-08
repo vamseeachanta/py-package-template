@@ -216,6 +216,72 @@
                 "clear": false
             },
             "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Basic Tests (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["basic"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Tests with Coverage (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["coverage"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "uv: Run Full Test Suite (Git Bash)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/uv-test.sh",
+            "args": ["full"],
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-c"]
+                }
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
         }
     ]
 }
