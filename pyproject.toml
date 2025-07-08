@@ -23,7 +23,7 @@ requires-python = ">=3.7"
     dev   = ["black", "bumpver", "isort", "pytest"]
 
     [project.scripts]
-    pressure_pipe = "py_package.pressure_pipe"
+    pressure_pipe = "py_package.calculation:pressure_pipe"
 
     [project.urls]
     repository    = "https://github.com/vamseeachanta/py_package"
