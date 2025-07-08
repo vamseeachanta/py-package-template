@@ -22,7 +22,32 @@ The recommended practices for developing python libraries are given below:
 
 [https://realpython.com/pypi-publish-python-package/](https://realpython.com/pypi-publish-python-package/)
 
-**Using toml file, bumpver and twine**
+### Modern Approach: Using UV (Recommended)
+
+**UV is an extremely fast Python package manager** that replaces pip, pip-tools, pipenv, poetry, and more with a single tool. See our comprehensive guides:
+
+- **[UV Best Practices](docs/uv_best_practices.md)** - Complete guide to using UV for Python package development
+- **[UV vs Traditional Workflow](docs/uv_workflow_comparison.md)** - Detailed comparison showing 10x+ performance improvements
+
+**Quick UV Workflow:**
+
+| Step | Description | UV Commands |
+|------|-------------|-------------|
+| 1 | Initialize project | `uv init --lib my-package` |
+| 2 | Install dependencies | `uv sync` (creates venv + lockfile) |
+| 3 | Add dependency | `uv add requests` |
+| 4 | Run tests | `uv run pytest` |
+| 5 | Build package | `uv build` |
+| 6 | Publish package | `uv publish` |
+
+**Key Benefits:**
+- 🚀 **10-100x faster** than traditional tools
+- 🔧 **Single tool** replaces entire toolchain
+- 🔒 **Automatic lockfiles** for reproducible builds
+- 🐍 **Python version management** built-in
+- ⚡ **Zero-config** virtual environments
+
+**Using toml file, bumpver and twine (Traditional)**
 
 | Step |  Description | Commands/Detailed Description | Reference |
 |---|---|---|---|
@@ -34,6 +59,36 @@ The recommended practices for developing python libraries are given below:
 To see instructions using setup.py & twine, without Version Bump, see [using setup.py](docs\using_setuppy.md)
 
 ## CI
+
+### Modern CI/CD with UV (Recommended)
+
+UV significantly simplifies CI/CD pipelines with faster operations and fewer dependencies:
+
+```yaml
+# .github/workflows/test.yml
+- name: Install uv
+  uses: astral-sh/setup-uv@v3
+  
+- name: Install dependencies and run tests
+  run: |
+    uv sync --extra dev
+    uv run pytest
+    
+- name: Build and publish
+  run: |
+    uv build
+    uv publish
+```
+
+See [our example workflow](.github/workflows/test_uv.yml) for a complete CI/CD pipeline using UV.
+
+**Benefits in CI/CD:**
+- ⚡ **Faster builds** (5-10x speedup)
+- 🔧 **Simpler configuration** (fewer steps)
+- 🔒 **Reproducible environments** (lockfile support)
+- 🐍 **Multi-Python testing** (built-in Python management)
+
+### Traditional CI/CD
 
 More CI/CD streamlining for python packages:
 - use cookiecutter to generate a package template
@@ -100,6 +155,13 @@ Building A Package Locally
 
 ### References
 
+**UV Documentation:**
+- **[UV Quick Start Guide](docs/uv_quick_start.md)** - Get started with UV in under 5 minutes
+- **[UV Best Practices](docs/uv_best_practices.md)** - Comprehensive UV guide for Python packages
+- **[UV vs Traditional Workflow](docs/uv_workflow_comparison.md)** - Performance and DX comparisons
+- **[UV-Optimized pyproject.toml Template](pyproject_uv_template.toml)** - Copy-paste template
+
+**Traditional Packaging:**
 [https://www.freecodecamp.org/news/build-your-first-python-package/](https://www.freecodecamp.org/news/build-your-first-python-package/)
 
 [https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
