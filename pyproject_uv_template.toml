@@ -1,0 +1,256 @@
+# Modern pyproject.toml optimized for UV
+
+# This is a template pyproject.toml file optimized for UV workflows
+# Copy and modify this for your own projects
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "your-package-name"
+version = "0.1.0"
+description = "A sample Python package optimized for UV workflow"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+maintainers = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10", 
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["python", "package", "template"]
+dependencies = [
+    # Runtime dependencies
+    "pyyaml>=6.0",
+    # Use tomli for Python < 3.11 compatibility
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+# Development dependencies (installed with: uv sync --extra dev)
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "isort>=5.12",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+    "pre-commit>=3.0",
+]
+
+# Documentation dependencies (installed with: uv sync --extra docs)
+docs = [
+    "sphinx>=5.0",
+    "sphinx-rtd-theme>=1.2",
+    "myst-parser>=0.18",
+]
+
+# Building and publishing (installed with: uv sync --extra build)
+build = [
+    "build>=0.10.0",
+    "twine>=4.0.0",
+]
+
+# Testing with multiple Python versions
+test = [
+    "tox>=4.0",
+    "pytest-xdist>=3.0",  # Parallel testing
+]
+
+# All extras combined
+all = [
+    "your-package-name[dev,docs,build,test]"
+]
+
+[project.scripts]
+# Console scripts (installed with package)
+your-package = "your_package.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/your-package"
+Documentation = "https://your-package.readthedocs.io"
+Repository = "https://github.com/yourusername/your-package"
+"Bug Tracker" = "https://github.com/yourusername/your-package/issues"
+Changelog = "https://github.com/yourusername/your-package/blob/main/CHANGELOG.md"
+
+# UV-specific configuration
+[tool.uv]
+# Development dependencies (alternative to project.optional-dependencies.dev)
+dev-dependencies = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0", 
+    "black>=23.0",
+    "isort>=5.12",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+    "pre-commit>=3.0",
+]
+
+# Package sources for development versions or private packages
+# [[tool.uv.sources]]
+# my-dependency = { git = "https://github.com/user/my-dependency.git" }
+# private-package = { path = "../private-package", editable = true }
+
+# Workspace configuration (for monorepos)
+# [tool.uv.workspace]
+# members = ["packages/*"]
+
+# Tool configuration
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+src_paths = ["src", "tests"]
+
+[tool.ruff]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F", "W", "I", "N", "B", "A", "S", "C4", "COM", "T20"]
+ignore = [
+    "E501",  # Line too long (handled by black)
+    "S101",  # Use of assert (OK in tests)
+]
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr", ".direnv", ".eggs", ".git", ".git-rewrite", ".hg", ".mypy_cache",
+    ".nox", ".pants.d", ".pytype", ".ruff_cache", ".svn", ".tox", ".venv",
+    "__pypackages__", "_build", "buck-out", "build", "dist", "node_modules",
+    "venv",
+]
+
+line-length = 88
+target-version = "py38"
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101"]  # Allow assert in tests
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-ra",
+    "--strict-markers", 
+    "--strict-config",
+    "--cov=src",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+python_classes = ["Test*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/__main__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+precision = 2
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+# Pre-commit configuration (optional but recommended)
+# Create .pre-commit-config.yaml:
+# repos:
+#   - repo: https://github.com/pre-commit/pre-commit-hooks
+#     rev: v4.4.0
+#     hooks:
+#       - id: trailing-whitespace
+#       - id: end-of-file-fixer
+#       - id: check-yaml
+#       - id: check-added-large-files
+#   - repo: https://github.com/psf/black
+#     rev: 23.3.0
+#     hooks:
+#       - id: black
+#   - repo: https://github.com/pycqa/isort  
+#     rev: 5.12.0
+#     hooks:
+#       - id: isort
+#   - repo: https://github.com/charliermarsh/ruff-pre-commit
+#     rev: v0.0.270
+#     hooks:
+#       - id: ruff

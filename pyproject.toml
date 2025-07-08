@@ -8,9 +8,8 @@ version = "0.0.1"
 description = "Python Package Cookiecutter Code"
 readme = "README.md"
 authors = [{ name = "Vamsee Achanta", email = "vamsee.achanta@aceengineer.com" }]
-license = { file = "LICENSE" }
+license = "MIT"
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
@@ -45,6 +44,15 @@ push            = false
     ]
     "src/py_package/__init__.py" = ["{version}"]
     "src/py_package/__main__.py" = ["- leveraged-multi-family-analysis v{version}"]
+
+# UV-specific configurations
+[tool.uv]
+dev-dependencies = [
+    "pytest>=6.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "mypy>=0.900",
+]
 
 [tool.isort]
 profile                   = "black"

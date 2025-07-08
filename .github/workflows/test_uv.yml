@@ -1,0 +1,73 @@
+name: Test with UV
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+
+    - name: Set up Python ${{ matrix.python-version }}
+      run: uv python install ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: uv sync --extra dev
+
+    - name: Run linting
+      run: |
+        uv run black --check src/
+        uv run isort --check-only src/
+
+    - name: Run type checking
+      run: uv run mypy src/ --ignore-missing-imports
+
+    - name: Run tests
+      run: uv run python src/py_package/tests/test_calculation.py
+
+    - name: Build package
+      run: uv build
+
+    - name: Test package installation
+      run: |
+        uv run pip install dist/*.whl
+        uv run python -c "import py_package; print('Package imported successfully')"
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Build package
+      run: uv build
+
+    - name: Publish to PyPI
+      run: uv publish
+      env:
+        UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+
+    - name: Publish to Test PyPI
+      run: uv publish --index-url https://test.pypi.org/legacy/
+      env:
+        UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
