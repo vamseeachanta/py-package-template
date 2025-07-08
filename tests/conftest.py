@@ -46,11 +46,11 @@ def temp_directory():
 @pytest.fixture
 def temp_file():
     """Fixture providing a temporary file for tests."""
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
-        yield Path(temp_file.name)
+    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as tmp_file:
+        yield Path(tmp_file.name)
     # Clean up
     try:
-        os.unlink(temp_file.name)
+        os.unlink(tmp_file.name)
     except FileNotFoundError:
         pass
 

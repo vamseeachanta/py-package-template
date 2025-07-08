@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
+
 """Tests for py_package_template.__main__ module
 
 This module tests the main entry point functionality including:
@@ -8,7 +12,6 @@ This module tests the main entry point functionality including:
 
 import pytest
 from unittest.mock import patch
-import sys
 
 import py_package_template
 from py_package_template import __main__ as main_module
@@ -156,15 +159,12 @@ class TestMainModuleIntegration:
     def test_main_module_package_integration(self):
         """Test that main module integrates properly with package."""
         # Test that main module is part of the package
-        import py_package_template
         assert hasattr(py_package_template, '__main__'), (
             "Package should have __main__ module"
         )
 
     def test_main_module_version_consistency(self):
         """Test that version in main module matches package version."""
-        import py_package_template
-        
         main_docstring = main_module.__doc__
         package_version = py_package_template.__version__
         
@@ -177,7 +177,6 @@ class TestMainModuleIntegration:
     def test_package_can_be_executed_as_module(self):
         """Test that package structure supports -m execution."""
         # This tests that the structure is correct for python -m execution
-        import py_package_template
         assert hasattr(py_package_template, '__main__'), (
             "Package should have __main__ for -m execution"
         )

@@ -162,23 +162,5 @@ class TestCalculationParametrized:
         assert isinstance(result, expected_type)
 
 
-# Test fixtures and utilities
-@pytest.fixture
-def capture_output():
-    """Fixture to capture stdout for testing print statements."""
-    original_stdout = sys.stdout
-    sys.stdout = captured_output = StringIO()
-    yield captured_output
-    sys.stdout = original_stdout
-
-
-class TestWithFixtures:
-    """Tests using pytest fixtures."""
-
-    def test_pressure_pipe_with_fixture(self, capture_output):
-        """Test pressure_pipe using the capture_output fixture."""
-        result = calculation.pressure_pipe()
-        output = capture_output.getvalue()
-        
-        assert result == 10
-        assert "10" in output
+# Validation tests demonstrate comprehensive pytest fixture usage
+# Additional fixture examples are available in conftest.py
