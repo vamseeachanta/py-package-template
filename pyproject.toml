@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "py-package-template"
-version = "0.0.1"
+version = "0.0.2"
 description = "Python Package Cookiecutter Code"
 readme = "README.md"
 authors = [{ name = "Vamsee Achanta", email = "vamsee.achanta@aceengineer.com" }]
@@ -67,7 +67,7 @@ dev-dependencies = [
 
 
 [tool.bumpver]
-current_version = "0.0.1"
+current_version = "0.0.2"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit_message  = "bump version {old_version} -> {new_version}"
 commit          = true
